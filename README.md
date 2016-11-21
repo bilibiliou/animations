@@ -1,5 +1,5 @@
 
-# 这些事我研究的一些前端的动画效果 包括 (Canvas 和 Svg)
+# 我研究的一些前端动画效果(Canvas 和 Svg)
 
 ## react-logo-animate
 

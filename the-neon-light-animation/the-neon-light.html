@@ -17,8 +17,8 @@
 </body>
 
 <script>
-  oW = 500;
-  oH = 320;
+  oW = 900;
+  oH = 400;
   M = Math;
   Cos = M.cos;
   Sin = M.sin;
@@ -32,18 +32,24 @@
   cradius = 15 // 圆角半径
   w = [];      // 圆运动圆角矩形轨迹
 
-  fx = 30;
+  gap = 10;
+
+  fx = gap;
   fy = 10;
 
-  fx2 = 40;
+  fx2 = gap + 10;
   fy2 = 20;
+
+  bw = (oW + gap) * 0.9;
+  bh = (oH + gap) * 0.875;
+
+  sw = bw - 20;
+  sh = bh - 20;
   // 边宽为5
   // drawRoundedRect(35,15, 440, 270, cradius,1 ,"#000")
 
   function getTrail () {
-    // (fx + fx2) / 2
-    // (fy + fy2) /2
-    var sx = fx + 25, sy = fy + 5, w = 460, h = 270, result = [],
+    var sx = fx + 15, sy = fy + 5, w = bw - 10, h = bh - 10, result = [],
         section = 2, // 轨迹点间隔区间 
         csection = 0.1, // 圆轨迹区间
         ccp = [0,0]          // 圆角圆心点
@@ -75,7 +81,7 @@
     sy = ccp[1] + cradius*Sin(i);
 
     // 下边
-    for (var i = sx; i >= 50; i -= section ) {
+    for (var i = sx; i >= 30; i -= section ) {
       result.push([i,sy]);
     }
     sx = i;
@@ -101,7 +107,7 @@
       result.push([ccp[0] + cradius*Cos(i), ccp[1] + cradius*Sin(i)]);
     }
 
-    result.push([fx + 25,fy + 5]);
+    result.push([fx + 15,fy + 5]);
     
     return result; 
   }
@@ -154,13 +160,11 @@
   // 用于表示运动的位置
   nowkey = 0;
   cflag = 1; // 灯光顺序改变
-  console.log(">>>>",w.length)
  
   render();
   
   function drawCricleGroup (v) {
-    var t = v,k = 0,m = 0;
-
+    var t = v,k = 0,m = 0; // m 控制绘制灯的个数
 
     // 当 k 差不多累计一圈轨迹之后，停止循环
     while (k + re <= w.length - 1) {
@@ -195,8 +199,8 @@
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 3;
     ctx.shadowColor = "rgba(255,255,255,1)"
-    drawRoundedRect(30,10,450,280,cradius,3,"#AF8DFB","#AF8DFB");
-    drawRoundedRect(40,20,430, 260,cradius,3,"transparent","#644AE1");
+    drawRoundedRect(fx,fy,bw,bh,cradius,3,"#AF8DFB","#AF8DFB");
+    drawRoundedRect(fx2,fy2,sw,sh,cradius,3,"transparent","#644AE1");
     ctx.restore();
 
     if(nowkey >= w.length - 1) {
@@ -212,7 +216,6 @@
     }
 
     requestAnimationFrame(render)
-
   }
 </script>
 </html>

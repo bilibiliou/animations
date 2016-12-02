@@ -21,9 +21,10 @@ y0 = ~~(Height / 2);
 LongAixs = (Width / 4) - (Width * 0.09375);
 ShortAixs = (Height / 10);
 
-w.push(ellipseGenerator(x0 , y0, LongAixs, ShortAixs, 0));
 w.push(ellipseGenerator(x0 , y0, LongAixs, ShortAixs, (3*PI)/4));
 w.push(ellipseGenerator(x0 , y0, LongAixs, ShortAixs, (5*PI)/4));
+w.push(ellipseGenerator(x0 , y0, LongAixs, ShortAixs, 0));
+
 
 function ellipseGenerator (x0, y0, a , b , beta) {
   let w = [];

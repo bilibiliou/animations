@@ -17,7 +17,7 @@
 </body>
 
 <script>
-  oW = 900;
+  oW = window.document.documentElement.getBoundingClientRect().width - 60;
   oH = 400;
   M = Math;
   Cos = M.cos;
@@ -40,13 +40,11 @@
   fx2 = gap + 10;
   fy2 = 20;
 
-  bw = (oW + gap) * 0.9;
+  bw = (oW - 2*gap);
   bh = (oH + gap) * 0.875;
 
   sw = bw - 20;
   sh = bh - 20;
-  // 边宽为5
-  // drawRoundedRect(35,15, 440, 270, cradius,1 ,"#000")
 
   function getTrail () {
     var sx = fx + 15, sy = fy + 5, w = bw - 10, h = bh - 10, result = [],

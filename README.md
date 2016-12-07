@@ -24,4 +24,4 @@
 
 ## 霓虹灯动画
 
-[demo](http://codepen.io/numerhero/embed/KNZRGz/?height=397&theme-id=0&default-tab=result&embed-version=2)
+[demo](http://codepen.io/numerhero/embed/KNZRGz/?height=650&theme-id=0&default-tab=result&embed-version=2)

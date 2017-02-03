@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+        }
+
+        .oC {
+        }
+    </style>
+</head>
+<body>
+    <canvas class="oC"></canvas>
+    <script src="./dest/vendor.bundle.js"></script>
+    <!-- 全局 部署控件 配置参数 -->
+    <script src="./src/Global.js"></script>
+    <!-- main + 各种类 进行打包 -->
+    <script src="./dest/bundle.js"></script>
+</body>
+</html>

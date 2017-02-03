@@ -1,0 +1,24 @@
+{
+  "name": "bessel",
+  "version": "1.0.0",
+  "description": "Bessel curve generator",
+  "main": "Bessel.js",
+  "scripts": {
+    "dev": "webpack --colors -w"
+  },
+  "author": "Owen <ouyangxiangyue@baidu.com> (https://github.com/numerhero)",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "css-loader": "^0.26.1",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0"
+  }
+}

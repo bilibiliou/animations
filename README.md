@@ -25,3 +25,12 @@
 ## 霓虹灯动画
 
 [demo](http://codepen.io/numerhero/embed/KNZRGz/?height=650&theme-id=0&default-tab=result&embed-version=2)
+
+
+## 基于Canvas描边动画工具（学习用）
+
+非常简单的一个描边动画工具
+
+下载直接打开 Beseel.html 可用
+
+![google](http://numerhero.github.io/assets/download/animations/google.gif)

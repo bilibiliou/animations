@@ -34,3 +34,9 @@
 下载直接打开 Beseel.html 可用
 
 ![google](http://numerhero.github.io/assets/download/animations/google.gif)
+
+## 404 错误页面
+
+这个动画案例只是我模仿的的
+
+This program doesn't finish By me, However I learn much some awesome and useful skill of sass and css, so I model [Lucas Bebber on codepen](http://codepen.io/lbebber/pen/ypgql/), If the author feel there is a Infringement of copyrights that I will remove this promgram immediately.

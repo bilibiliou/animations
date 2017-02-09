@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu_Beer</title>
+    <link rel="stylesheet" href="./baidu_beer.css">
+</head>
+<body>
+    <div class="main">
+        <div class="nose">
+            <div class="nose-be"></div>
+            <div class="nose-mi"></div>
+            <div class="nose-af"></div>
+
+            <div class="l-eye-wrap">
+                <div class="eye eye-be"></div>
+                <div class="eye eye-mi"></div>
+                <div class="eye eye-af"></div>
+
+                <div class="l-eye-face"></div>
+                <div class="l-ear-wrap">
+                    <div class="ear l-ear">
+                        <div class="ear-hole l-ear-hole"></div>
+                        <div class="ear-hole-mask l-ear-hole-mask"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r-eye-wrap">
+                <div class="eye eye-be"></div>
+                <div class="eye eye-mi"></div>
+                <div class="eye eye-af"></div>
+                <div class="r-eye-face"></div>
+                <div class="r-ear-wrap">
+                    <div class="ear r-ear">
+                        <div class="ear-hole r-ear-hole"></div>
+                        <div class="ear-hole-mask r-ear-hole-mask"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header"></div>
+        <div class="face"></div>
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
+        <defs>
+            <filter id="gooey">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="step1"/>
+                <feColorMatrix in="step1" mode="matrix" values="
+                    1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0  
+                    0 0 0 19 -9" result="step2" />
+                <feComposite in="SourceGraphic" in2="step2" operator="atop"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <script>
+    console.log('%c/**\n* Baidu Beer\n* Long may the sun shine :)\n*\n* @author Owen\n* @email  ouyangxiangyue@baidu.com\n* @github github/numerhero\n* @date   2017-02-09\n*/', 'color: #E74C3C; font-size: 16px; font-weight: 600');
+
+    +function () {
+        let oNose = $('.nose');
+        let oHeader = $('.header');
+        let oFace = $('.face');
+        let oLeyeWrap = $('.l-eye-wrap');
+        let oLeyeFace = $('.l-eye-face', oLeyeWrap);
+        let oReyeWrap = $('.r-eye-wrap');
+        let oReyeFace = $('.r-eye-face', oReyeWrap);
+        let oLearWrap = $('.l-ear-wrap');
+        let oRearWrap = $('.r-ear-wrap');
+        let oLear     = $('.l-ear');
+        let oRear     = $('.r-ear');
+        let oLearHole = $('.l-ear-hole');
+        let oRearHole = $('.r-ear-hole');
+        let oMasks    = $$('.ear-hole-mask');
+        let oEyes     = $$('.eye');
+        let oEars     = $$('.ear');
+        let oEarHole  = $$('.ear-hole');
+
+        let process = Promise.resolve();
+
+        process.then(() => {
+            oNose.classList.add('show');
+            return Sleep(600);
+        })
+        .then(() => {
+            oFace.classList.add('show');
+            return Sleep(600);
+        })
+        .then(() => {
+            oFace.classList.add('face-mor');
+            oHeader.classList.add('show');
+            return Sleep(600);
+        })
+        .then(() => {
+            oNose.classList.add('nose-mor');
+            oLeyeWrap.classList.add('l-eye-wrap-mor');
+            oReyeWrap.classList.add('r-eye-wrap-mor');
+            return Sleep(300);
+        })
+        .then(() => {
+            oNose.classList.add('nose-end');
+            return Sleep(900);
+        })
+        .then(() => {
+            oLeyeWrap.classList.add('eye-mor');
+            oReyeWrap.classList.add('eye-mor');
+            return Sleep(600);
+        })
+        .then(() => {
+            oLearWrap.classList.add('l-ear-wrap-mor');
+            oRearWrap.classList.add('r-ear-wrap-mor');
+            return Sleep(1000);
+        })
+        .then(() => {
+            oLear.classList.add('ear-mor');
+            oRear.classList.add('ear-mor');
+            return Sleep(1800);
+        })
+        .then(() => {
+            [].forEach.call(oMasks, (t) => t.classList.add('op-show'));
+            return Sleep(100);
+        })
+        .then(() => {
+            oLeyeFace.classList.add('show');
+            oReyeFace.classList.add('show');
+            oLearHole.classList.add('l-ear-hole-mor');
+            oRearHole.classList.add('r-ear-hole-mor');
+            return Sleep(800);
+        })
+        .then(() => {
+
+            [].forEach.call(oEyes, (t) => {
+                t.style.transition = '0s';
+            });
+
+            [].forEach.call(oEars, (t) => {
+                t.style.transition = '0s';
+            });
+
+            [].forEach.call(oEarHole, (t) => {
+                t.style.transition = '0s';
+            })
+
+            oLeyeWrap.style.transition = '0s';
+            oReyeWrap.style.transition = '0s';
+            oFace.style.transition = '0s';
+            oLearWrap.style.transition = '0s';
+            oRearWrap.style.transition = '0s';
+        })
+    }()
+
+    function $(v,d) {
+        d = d || document;
+        return d.querySelector(v);
+    }
+
+    function $$(v,d) {
+        d = d || document;
+        return d.querySelectorAll(v);
+    }
+
+    function Sleep(timeout) {
+        return new Promise(function(resolve) {
+            setTimeout(function () {
+                resolve();
+            },timeout);
+        });
+    }
+
+    
+    </script>
+</body>
+</html>

@@ -39,6 +39,8 @@
 
 这个动画案例只是我模仿的的
 
+[demo](http://codepen.io/numerhero/embed/VPGpdz/?height=430&theme-id=0&default-tab=result&embed-version=2)
+
 This program doesn't finish By me, However I learn much some awesome and useful skill of sass and css, so I model [Lucas Bebber on codepen](http://codepen.io/lbebber/pen/ypgql/), If the author feel there is a Infringement of copyrights that I will remove this promgram immediately.
 
 ## 百度熊动画

@@ -46,3 +46,7 @@ This program doesn't finish By me, However I learn much some awesome and useful 
 ## 百度熊动画
 
 [demo](http://codepen.io/numerhero/embed/JEmyJo/?height=507&theme-id=0&default-tab=result&embed-version=2)
+
+## 3d 翻折效果
+
+[demo](http://codepen.io/numerhero/embed/xqOyEY/?height=545&theme-id=0&default-tab=result&embed-version=2)

@@ -50,3 +50,9 @@ This program doesn't finish By me, However I learn much some awesome and useful 
 ## 3d 翻折效果
 
 [demo](http://codepen.io/numerhero/embed/xqOyEY/?height=545&theme-id=0&default-tab=result&embed-version=2)
+
+## 缤纷按钮效果（仿手Q）
+
+![gif](http://numerhero.github.io/assets/download/animations/colorful-button.gif)
+
+SVG 图取材于 阿里icon

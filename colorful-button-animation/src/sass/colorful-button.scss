@@ -1,0 +1,138 @@
+$base: 640;
+$items: 20;
+$ani-time: 1.4s;
+
+.thumb {
+    background: url(../src/svg/thumb.svg);    
+}
+
+.r-flower {
+    background: url("../src/svg/flower-red.svg");
+}
+
+.b-flower {
+    background: url("../src/svg/flower-blue.svg");
+}
+
+.y-flower {
+    background: url("../src/svg/flower-yellow.svg");
+}
+
+.g-leaf {
+    background: url("../src/svg/leaf-green.svg");
+}
+
+.y-leaf {
+    background: url("../src/svg/leaf-yellow.svg");
+}
+
+@mixin t ($s) {
+    transition: $s + s;
+}
+
+html, body {
+    height: 100%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    background: #f5f5f5;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stage {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    position: absolute;
+    z-index: 5201314;
+    width: 36/$base+rem;
+    height: 36/$base+rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    cursor: pointer;
+}
+
+.effect-list {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    li {
+        transition: $ani-time linear;
+        position: absolute;
+        cursor: default;
+    }
+}
+
+.effect-list-hidden {
+    opacity: 0;
+
+    li {
+        transform: translateY(0) !important; 
+    }
+}
+
+@for $i from 1 through $items {
+    .effect-list > li:nth-of-type(#{$i}) {
+        $size: floor(random(15)) + 16;
+        $gap: random(floor(10)) - 20;
+        width: $size/$base+rem;
+        height: $size/$base+rem;
+
+        transform: rotate($i * (360/$items) + $gap + deg) translateY(-90/$base+rem);
+    }
+}
+
+.show-hidden {
+    animation: show-hidden $ani-time linear forwards;
+}
+
+@keyframes show-hidden {
+    0% {
+        opacity: 0;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.elastic-scale {
+    animation: scaleXY .5s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+}
+
+@keyframes scaleXY {
+    0% {
+        transform: scale(1,1);
+    }
+    
+    50% {
+        transform: scale(1.2,1.2);
+    }
+
+    100% {
+        transform: scale(1,1);
+    }
+}

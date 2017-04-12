@@ -60,6 +60,7 @@ $rd: -90;
     }
 }
 .process-stage {
+    transition: .5s;
     r: $cr;
     cx: 50%;
     cy: 50%;
@@ -71,6 +72,7 @@ $rd: -90;
     transform-origin: 50% 50%;
     stroke-dasharray: 0 $cal;
     stroke-dashoffset: 0;
+    stroke-linecap: round;
 }
 
 @keyframes move {
@@ -113,4 +115,8 @@ $tw: ($cr + $csw) * 2 * .25 / $base + rem;
 
 .show {
     transform: scale(1);
+}
+
+.hidden {
+    opacity: 0;   
 }

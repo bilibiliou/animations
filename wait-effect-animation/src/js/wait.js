@@ -14,6 +14,7 @@
         .then(() => {
             oPs.style.animationIterationCount = 1;
             oWait.style.animationIterationCount = 1;
+            oWait.classList.add('hidden');
             oT.classList.add('show');
         })        
     })

@@ -1,0 +1,32 @@
+{
+  "name": "wait-effect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Owen <ouyangxiangyue@baidu.com> (https://github.com/numerhero)",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2"
+    ],
+    "plugins": [
+      "es6-promise"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.2",
+    "babel-plugin-es6-promise": "^1.1.1",
+    "babel-preset-stage-2": "^6.22.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-plumber": "^1.1.0",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-uglify": "^2.0.1"
+  }
+}

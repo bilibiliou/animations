@@ -35,14 +35,6 @@
 
 ![google](http://numerhero.github.io/assets/download/animations/google.gif)
 
-## 404 错误页面
-
-这个动画案例只是我模仿的的
-
-[demo](http://codepen.io/numerhero/embed/VPGpdz/?height=430&theme-id=0&default-tab=result&embed-version=2)
-
-This program doesn't finish By me, However I learn much some awesome and useful skill of sass and css, so I model [Lucas Bebber on codepen](http://codepen.io/lbebber/pen/ypgql/), If the author feel there is a Infringement of copyrights that I will remove this promgram immediately.
-
 ## 百度熊动画
 
 [demo](http://codepen.io/numerhero/embed/JEmyJo/?height=507&theme-id=0&default-tab=result&embed-version=2)
@@ -56,3 +48,7 @@ This program doesn't finish By me, However I learn much some awesome and useful 
 ![gif](http://numerhero.github.io/assets/download/animations/colorful-button.gif)
 
 SVG 图取材于 阿里icon
+
+## SVG loading
+
+![gif](http://numerhero.github.io/assets/download/animations/wait.gif)

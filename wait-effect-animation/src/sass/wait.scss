@@ -1,0 +1,116 @@
+$base: 640;
+
+body {
+    height: 300/$base+rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+figure {
+    margin: auto;
+    padding: 0;
+}
+
+$cr: 100;
+$csw: 10;
+$cal: 2 * 3.1415926 * $cr;
+$p: .5;
+$crsl: $cal * $p;
+$time: 4;
+
+$rd: -90;
+.wrap {
+    width: ($cr + $csw + 5) / $base + rem;
+    height: ($cr + $csw + 5) / $base +rem;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wait {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.wait-mor {
+    animation: wrotate $time/4 + s ease-in infinite;
+    .process-stage {
+        animation: move $time + s ease-out infinite;
+    }    
+}
+.download {
+    transition: .5s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+    width: 40/$base+rem;
+    height: 20/$base+rem;
+    margin: auto;
+    position: absolute;
+    z-index: 1000;
+    color: #fff;
+    background: #19A15F;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 0 10px #000;
+    cursor: pointer;
+    outline: none;
+    
+    &:active {
+        transform: scale(1.1);
+    }
+}
+.process-stage {
+    r: $cr;
+    cx: 50%;
+    cy: 50%;
+    
+    fill: transparent;
+    stroke: #19A15F;
+    stroke-width: $csw;
+    transform: rotate($rd + deg);
+    transform-origin: 50% 50%;
+    stroke-dasharray: 0 $cal;
+    stroke-dashoffset: 0;
+}
+
+@keyframes move {
+    0%, 10% {stroke-dasharray: 0 $cal; stroke-dashoffset: 0;
+        transform: rotate($rd + deg);
+    }
+    
+    25% {stroke-dasharray: $crsl $cal; stroke-dashoffset: 0;
+        transform: rotate($rd + deg);
+    }
+    
+    40%,50% {stroke-dasharray: $crsl $cal; stroke-dashoffset: $crsl;
+        transform: rotate($rd + (360 * $p) + deg);
+    }
+    
+    75% {
+        stroke-dasharray: $crsl $cal; stroke-dashoffset: $cal;
+        transform: rotate($rd + 360 + deg);    
+    }
+    
+    90%,100% {
+        stroke-dasharray: $crsl $cal; stroke-dashoffset: $crsl;
+        transform: rotate($rd + 360 + deg);   
+    }
+}
+
+@keyframes wrotate {
+   100% {transform: rotate(360deg);}
+}
+
+$tw: ($cr + $csw) * 2 * .25 / $base + rem;
+.t {
+    transition: .8s;
+    width: $tw;
+    height: $tw;
+    margin: auto;
+    background: url("../src/svg/t.svg");
+    transform: scale(0);
+}
+
+.show {
+    transform: scale(1);
+}

@@ -1,6 +1,17 @@
 
 # 我研究的一些前端动画效果(Canvas 和 Svg)
 
+## 基于 ThreeJs 图片折纸 Hover 动画
+
+![gif](http://numerhero.github.io/assets/download/animations/heart-animation.gif)
+
+注：
+
+1. 本动画创业非原创，而是二次创造，感谢 homunculus 公司 https://homunculus.jp/
+本人阅读源码受此启发上做出了 心形 动画
+
+2. 本地浏览的时候由于浏览器对资源来源限制，需要启动服务器环境，这个很简单 推荐使用 http-server 访问（在文件根目录，打开 cmder 输入http-server 命令即可）
+
 ## react-logo-animate
 
 一个react logo 动画效果

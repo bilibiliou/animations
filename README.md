@@ -3,7 +3,7 @@
 
 ## 基于 ThreeJs 图片折纸 Hover 动画
 
-![gif](http://numerhero.github.io/assets/download/animations/heart-animation.gif)
+![gif](https://numerhero.github.io/assets/download/animations/heart-animation.gif)
 
 注：
 
@@ -44,22 +44,22 @@
 
 下载直接打开 Beseel.html 可用
 
-![google](http://numerhero.github.io/assets/download/animations/google.gif)
+![google](https://numerhero.github.io/assets/download/animations/google.gif)
 
 ## 百度熊动画
 
-[demo](http://codepen.io/numerhero/embed/JEmyJo/?height=507&theme-id=0&default-tab=result&embed-version=2)
+[demo](https://codepen.io/numerhero/embed/JEmyJo/?height=507&theme-id=0&default-tab=result&embed-version=2)
 
 ## 3d 翻折效果
 
-[demo](http://codepen.io/numerhero/embed/xqOyEY/?height=545&theme-id=0&default-tab=result&embed-version=2)
+[demo](https://codepen.io/numerhero/embed/xqOyEY/?height=545&theme-id=0&default-tab=result&embed-version=2)
 
 ## 缤纷按钮效果（仿手Q）
 
-![gif](http://numerhero.github.io/assets/download/animations/colorful-button.gif)
+![gif](https://numerhero.github.io/assets/download/animations/colorful-button.gif)
 
 SVG 图取材于 阿里icon
 
 ## SVG loading
 
-![gif](http://numerhero.github.io/assets/download/animations/wait.gif)
+![gif](https://numerhero.github.io/assets/download/animations/wait.gif)

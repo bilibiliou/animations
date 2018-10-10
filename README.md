@@ -1,6 +1,14 @@
 
 # 我研究的一些前端动画效果(Canvas 和 Svg)
 
+## 声音可视化
+
+![gif](https://numerhero.github.io/assets/download/animations/voice-virtual.gif)
+
+颜色控制请参考这篇文章
+
+[https://krazydad.com/tutorials/makecolors.php](https://krazydad.com/tutorials/makecolors.php)
+
 ## 基于 ThreeJs 图片折纸 Hover 动画
 
 ![gif](https://numerhero.github.io/assets/download/animations/heart-animation.gif)

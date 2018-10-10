@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>audio-virtual</title>
+  <style>
+  	body {
+			background: #000;
+		}
+    </style>
+</head>
+<body>
+  <input type="file" id="download" />
+  <canvas id="wave"></canvas>
+  <script>
+    window.onload = function () {
+      window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
+
+      try {
+        audioCtx = new AudioContext();
+      } catch (e) {
+        console.error(e)
+      }
+
+      function $(v, d) {
+        d = d || document
+        return d.querySelector(v)
+      }
+      var STOP = true
+      var processor = null
+      var audioBufferSourceNode = null
+      var analyser = null
+      var samplePoint = 256 // 采样数
+      var dataStack = new Array(samplePoint).fill(0)
+      function visualize(buffer) {
+        audioBufferSourceNode = audioCtx.createBufferSource()
+        /** 创建声源分析器 */
+        analyser = audioCtx.createAnalyser()
+        /** 创建控制音频音量的中间件 */
+        var gainNode = audioCtx.createGain();
+
+        // 把音源 buffer => 嵌入到 audio Ctx 中
+        audioBufferSourceNode.buffer = buffer
+
+        /** 连接音量控制器 */
+        audioBufferSourceNode.connect(gainNode)
+
+        audioBufferSourceNode.connect(analyser)
+        // 将声音连接到扬声器
+        audioBufferSourceNode.connect(audioCtx.destination)
+
+        // start 入参为时刻，即从什么时候开始播放
+        audioBufferSourceNode.start(0)
+        STOP = false
+        // 以线性的方式停止
+        // gainNode.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+        // 以指数的方式停止, 在路由前5秒逐渐减少声音
+        var rampTime = Math.min(audioCtx.currentTime - 0.08, audioCtx.currentTime)
+        gainNode.gain.exponentialRampToValueAtTime(0.001, rampTime);
+        // 声音响起后，将分析器的信息传递给绘图引擎进行绘图
+        drawSpectrum(analyser)
+
+        audioBufferSourceNode.onended = function () {
+          audioBufferSourceNode.disconnect(analyser)
+          processor.disconnect(audioCtx.destination)
+          analyser.disconnect(processor)
+          var a = new Array(samplePoint).fill(0)
+          dataStack = a
+          setTimeout(function () {
+            STOP = true
+          }, 100)
+        }
+      }
+
+      function drawSpectrum (analyser) {
+        /** 定义一个缓冲处理区 */
+        processor = audioCtx.createScriptProcessor(4096, 1, 1)
+
+        /** 将缓冲区和扬声器相连接 */
+        processor.connect(audioCtx.destination)
+
+        /** 将分析器将缓冲区相互连接 */
+        analyser.connect(processor)
+        // 快速傅立叶变换 Fast Fourier Transform frequencyBinCount 为 FFT 的一半
+        /* 定义一个 Uint8Array 字节流去接收分析后的数据 */
+        var bufferLength = analyser.frequencyBinCount
+        var data = new Uint8Array(analyser.frequencyBinCount)
+
+        processor.onaudioprocess = function () {
+          analyser.getByteTimeDomainData(data)
+          var step = Math.round(data.length / samplePoint)
+          var stack = []
+          for ( var i = 0; i < samplePoint ; i++ ) {
+            var value = data[i * step]
+            stack.push(value)
+          }
+          dataStack = stack
+        }
+      }
+
+      var oFile = $('#download')
+      var oFileContent = null
+      oFile.onchange = function () {
+        if (!audioCtx) { return }
+        if (oFile.files.length !== 0) {
+          oFileContent = oFile.files[0]
+          oFileName = oFileContent.name
+
+          var fr = new FileReader()
+          fr.readAsArrayBuffer(oFileContent)
+          fr.onload = function (e) {
+            var fileResult = e.target.result
+            /** 处理 音频文件解码 后的数据 */
+            audioCtx.decodeAudioData(fileResult, function (buffer) {
+              visualize(buffer)
+            }, function (e) {
+              console.log('decode errrrrror!')
+            })
+          }
+        }
+      }
+
+      var ctxDocumentElement = $('#wave')
+      var ctx = ctxDocumentElement.getContext('2d')
+      var ctxRadius = 1000
+      var ctxRatio = 2
+      ctxDocumentElement.width = ctxRadius
+      ctxDocumentElement.height = ctxRadius
+
+      ctxDocumentElement.style.width = ctxRadius / ctxRatio + 'px'
+      ctxDocumentElement.style.height = ctxRadius / ctxRatio + 'px'
+
+      var width2 = ctxRadius / 2
+      var height2 = ctxRadius / 2
+
+      var width6 = ctxRadius / 6
+      var height6 = ctxRadius / 6
+
+      var heightMax = height2 - 4
+
+      var R = ctxRadius - 20
+
+      var arcX = width2
+      var arcY = height2
+
+      var drawAreaGap = (4 * width6) / samplePoint
+      var arcStack = []
+      var M = Math
+      var PI = M.PI
+      var Cos = M.cos
+      var Sin = M.sin
+
+      // 创建离屏画布
+      function createCanvas () {
+        var oCanvas = document.createElement('canvas')
+        oCanvas.width = ctxRadius
+        oCanvas.height = ctxRadius
+
+        oCanvas.style.width = ctxRadius / ctxRatio + 'px'
+        oCanvas.style.height = ctxRadius / ctxRatio + 'px'
+        return oCanvas
+      }
+
+      // 颜色函数
+      function RGB2Color(r,g,b) {
+        return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+      }
+
+      function byte2Hex(n) {
+        var nybHexString = "0123456789ABCDEF";
+        return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+      }
+
+      function colorful (i) {
+        var frequency = .1;
+        red   = Math.sin(frequency*i + 0) * 127 + 128;
+        green = Math.sin(frequency*i + 2) * 127 + 128;
+        blue  = Math.sin(frequency*i + 4) * 127 + 128;
+
+        return RGB2Color(red,green,blue)
+      }
+
+      function gapVar (gapLen) {
+        var f = 0
+        var e = gapLen - 1
+        var result = []
+        return function () {
+          result = [f, e]
+
+          if (e - f <= 1) {
+            f = 0
+            e = gapLen - 1
+          } else {
+            ++f; --e
+          }
+          return result
+        }
+      }
+
+      var getVar = gapVar(128)
+      var bgCanvas = createCanvas()
+      var bgCtx = bgCanvas.getContext('2d')
+
+      var voiceCanvas = createCanvas()
+      var voiceCtx = voiceCanvas.getContext('2d')
+
+      var colorCount = 16
+
+      function update () {
+        var average = dataStack.reduce((p, n) => p + n) / samplePoint
+        ctx.clearRect(0, 0, ctxRadius, ctxRadius);
+
+        voiceCtx.clearRect(0, 0, ctxRadius, ctxRadius)
+
+        for (var i = -(PI/2), k = 0; i <= -(PI/2) + PI * 2; i+=2 * PI/samplePoint, k++) {
+          var x = (R + arcX * Cos(i) )/ ctxRatio
+          var y = (R + arcY * Sin(i)) / ctxRatio
+          var rectWidth = 5
+          var rectHeight = (dataStack[k] - average) * 3
+          voiceCtx.save()
+          voiceCtx.translate(x + (rectWidth / 2) , y)
+          voiceCtx.rotate(PI/2 + i)
+
+          voiceCtx.beginPath()
+          voiceCtx.rect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight)
+          voiceCtx.fillStyle = '#fff'
+          voiceCtx.fill()
+          voiceCtx.restore()
+        }
+
+        bgCtx.clearRect(0, 0, ctxRadius, ctxRadius)
+        var grd = bgCtx.createLinearGradient(0 ,0, ctxRadius, ctxRadius);
+        var bit = getVar()
+        grd.addColorStop(0, colorful(bit[0]));
+        grd.addColorStop(1, colorful(bit[1]));
+        bgCtx.fillStyle = grd
+        bgCtx.fillRect(0,0,ctxRadius, ctxRadius)
+
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.drawImage(voiceCanvas, 0, 0)
+        ctx.globalCompositeOperation = 'source-in';
+        ctx.drawImage(bgCanvas, 0, 0)
+      }
+
+      +function render () {
+        requestAnimationFrame(render)
+        // if (!STOP) {
+          update()
+        // }
+      }()
+    }
+  </script>
+</body>
+</html>

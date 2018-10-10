@@ -15,7 +15,7 @@
 
 注：
 
-1. 本动画创业非原创，而是二次创造，感谢 homunculus 公司 https://homunculus.jp/
+1. 本动画创意非原创，而是二次创造，感谢 homunculus 公司 https://homunculus.jp/
 本人阅读源码受此启发上做出了 心形 动画
 
 2. 本地浏览的时候由于浏览器对资源来源限制，需要启动服务器环境，这个很简单 推荐使用 http-server 访问（在文件根目录，打开 cmder 输入http-server 命令即可）

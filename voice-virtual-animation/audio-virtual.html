@@ -32,7 +32,8 @@
       var processor = null
       var audioBufferSourceNode = null
       var analyser = null
-      var samplePoint = 256 // 采样数
+      /** 决定了音频采样的数量，如果取 256 则为柱状图，越多其曲线越光滑 */
+      var samplePoint = 1024 // 采样数
       var dataStack = new Array(samplePoint).fill(0)
       function visualize(buffer) {
         audioBufferSourceNode = audioCtx.createBufferSource()
@@ -63,9 +64,9 @@
         drawSpectrum(analyser)
 
         audioBufferSourceNode.onended = function () {
-          audioBufferSourceNode.disconnect(analyser)
-          processor.disconnect(audioCtx.destination)
-          analyser.disconnect(processor)
+          // audioBufferSourceNode.disconnect(analyser)
+          // processor.disconnect(audioCtx.destination)
+          // analyser.disconnect(processor)
           var a = new Array(samplePoint).fill(0)
           dataStack = a
           setTimeout(function () {
@@ -83,7 +84,7 @@
 
         /** 将分析器将缓冲区相互连接 */
         analyser.connect(processor)
-        // 快速傅立叶变换 Fast Fourier Transform frequencyBinCount 为 FFT 的一半
+        // 快速傅立叶变换 Fast Fourier Transform | frequencyBinCount 为 FFT 的一半
         /* 定义一个 Uint8Array 字节流去接收分析后的数据 */
         var bufferLength = analyser.frequencyBinCount
         var data = new Uint8Array(analyser.frequencyBinCount)
@@ -135,9 +136,6 @@
       var width2 = ctxRadius / 2
       var height2 = ctxRadius / 2
 
-      var width6 = ctxRadius / 6
-      var height6 = ctxRadius / 6
-
       var heightMax = height2 - 4
 
       var R = ctxRadius - 20
@@ -145,7 +143,6 @@
       var arcX = width2
       var arcY = height2
 
-      var drawAreaGap = (4 * width6) / samplePoint
       var arcStack = []
       var M = Math
       var PI = M.PI
@@ -174,7 +171,7 @@
       }
 
       function colorful (i) {
-        var frequency = .1;
+        var frequency = .05;
         red   = Math.sin(frequency*i + 0) * 127 + 128;
         green = Math.sin(frequency*i + 2) * 127 + 128;
         blue  = Math.sin(frequency*i + 4) * 127 + 128;
@@ -193,13 +190,13 @@
             f = 0
             e = gapLen - 1
           } else {
-            ++f; --e
+            ++f; --e;
           }
           return result
         }
       }
 
-      var getVar = gapVar(128)
+      var getVar = gapVar(256)
       var bgCanvas = createCanvas()
       var bgCtx = bgCanvas.getContext('2d')
 
@@ -208,7 +205,9 @@
 
       var colorCount = 16
 
+      var temp = 1 // 波高，越大，波峰越高
       function update () {
+        // 以平均值作为基准
         var average = dataStack.reduce((p, n) => p + n) / samplePoint
         ctx.clearRect(0, 0, ctxRadius, ctxRadius);
 
@@ -218,7 +217,7 @@
           var x = (R + arcX * Cos(i) )/ ctxRatio
           var y = (R + arcY * Sin(i)) / ctxRatio
           var rectWidth = 5
-          var rectHeight = (dataStack[k] - average) * 3
+          var rectHeight = (dataStack[k] - average) * temp
           voiceCtx.save()
           voiceCtx.translate(x + (rectWidth / 2) , y)
           voiceCtx.rotate(PI/2 + i)
@@ -246,9 +245,9 @@
 
       +function render () {
         requestAnimationFrame(render)
-        // if (!STOP) {
+        if (!STOP) {
           update()
-        // }
+        }
       }()
     }
   </script>

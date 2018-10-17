@@ -9,6 +9,9 @@
   	body {
 			background: #000;
 		}
+    #wave {
+      transform: scale(0.75);
+    }
     </style>
 </head>
 <body>
@@ -33,7 +36,7 @@
       var audioBufferSourceNode = null
       var analyser = null
       /** 决定了音频采样的数量，如果取 256 则为柱状图，越多其曲线越光滑 */
-      var samplePoint = 1024 // 采样数
+      var samplePoint = 256 // 采样数
       var dataStack = new Array(samplePoint).fill(0)
       function visualize(buffer) {
         audioBufferSourceNode = audioCtx.createBufferSource()
@@ -126,19 +129,19 @@
       var ctxDocumentElement = $('#wave')
       var ctx = ctxDocumentElement.getContext('2d')
       var ctxRadius = 1000
-      var ctxRatio = 2
       ctxDocumentElement.width = ctxRadius
       ctxDocumentElement.height = ctxRadius
 
-      ctxDocumentElement.style.width = ctxRadius / ctxRatio + 'px'
-      ctxDocumentElement.style.height = ctxRadius / ctxRatio + 'px'
+      ctxDocumentElement.style.width = ctxRadius + 'px'
+      ctxDocumentElement.style.height = ctxRadius + 'px'
+      // ctx.scale(ctxRatio, ctxRatio)
 
       var width2 = ctxRadius / 2
       var height2 = ctxRadius / 2
 
       var heightMax = height2 - 4
 
-      var R = ctxRadius - 20
+      var R = width2 / 2
 
       var arcX = width2
       var arcY = height2
@@ -155,8 +158,8 @@
         oCanvas.width = ctxRadius
         oCanvas.height = ctxRadius
 
-        oCanvas.style.width = ctxRadius / ctxRatio + 'px'
-        oCanvas.style.height = ctxRadius / ctxRatio + 'px'
+        oCanvas.style.width = ctxRadius + 'px'
+        oCanvas.style.height = ctxRadius + 'px'
         return oCanvas
       }
 
@@ -197,12 +200,11 @@
       }
 
       var getVar = gapVar(256)
-      var bgCanvas = createCanvas()
+      var bgCanvas = createCanvas() // 背景颜色画布
       var bgCtx = bgCanvas.getContext('2d')
 
-      var voiceCanvas = createCanvas()
+      var voiceCanvas = createCanvas() // 音频图画布
       var voiceCtx = voiceCanvas.getContext('2d')
-
       var colorCount = 16
 
       var temp = 1 // 波高，越大，波峰越高
@@ -214,10 +216,11 @@
         voiceCtx.clearRect(0, 0, ctxRadius, ctxRadius)
 
         for (var i = -(PI/2), k = 0; i <= -(PI/2) + PI * 2; i+=2 * PI/samplePoint, k++) {
-          var x = (R + arcX * Cos(i) )/ ctxRatio
-          var y = (R + arcY * Sin(i)) / ctxRatio
+          var x = width2 + R * Cos(i)
+          var y = height2 + R * Sin(i)
           var rectWidth = 5
           var rectHeight = (dataStack[k] - average) * temp
+
           voiceCtx.save()
           voiceCtx.translate(x + (rectWidth / 2) , y)
           voiceCtx.rotate(PI/2 + i)

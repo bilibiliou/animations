@@ -8,7 +8,10 @@
 ## 声音可视化
 
 ![gif](https://numerhero.github.io/assets/download/animations/voice-virtual.gif)
+
 [voice visualization codepen](https://codepen.io/numerhero/pen/BvvPRM)
+
+
 颜色控制请参考这篇文章:
 
 [https://krazydad.com/tutorials/makecolors.php](https://krazydad.com/tutorials/makecolors.php)

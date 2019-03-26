@@ -5,17 +5,17 @@
 
 这个效果由纯GLSL 语言完成，算是我学习GLSL的 处女作，记录一下
 
-[demo](https://codepen.io/numerhero/pen/eXzMWY)
+[demo](https://codepen.io/bilibiliou/pen/eXzMWY)
 
 ## 玻璃之心
 
-[demo](https://codepen.io/numerhero/pen/ZVrWaw)
+[demo](https://codepen.io/bilibiliou/pen/ZVrWaw)
 
 ## 声音可视化
 
-![gif](https://numerhero.github.io/assets/download/animations/voice-virtual.gif)
+![gif](https://bilibiliou.github.io/assets/download/animations/voice-virtual.gif)
 
-[voice visualization codepen](https://codepen.io/numerhero/pen/BvvPRM)
+[voice visualization codepen](https://codepen.io/bilibiliou/pen/BvvPRM)
 
 
 颜色控制请参考这篇文章:
@@ -24,7 +24,7 @@
 
 ## 基于 ThreeJs 图片折纸 Hover 动画
 
-![gif](https://numerhero.github.io/assets/download/animations/heart-animation.gif)
+![gif](https://bilibiliou.github.io/assets/download/animations/heart-animation.gif)
 
 注：
 
@@ -37,26 +37,26 @@
 
 一个react logo 动画效果
 
-[demo](http://codepen.io/numerhero/embed/bwOBGz/?height=800&theme-id=0&default-tab=result&embed-version=2)
+[demo](http://codepen.io/bilibiliou/embed/bwOBGz/?height=800&theme-id=0&default-tab=result&embed-version=2)
 
 ## 水波动画
 
 百分比数据可视化水波视图
 
-[demo](http://codepen.io/numerhero/embed/rWBKJp/?height=600&theme-id=0&default-tab=result&embed-version=2)
+[demo](http://codepen.io/bilibiliou/embed/rWBKJp/?height=600&theme-id=0&default-tab=result&embed-version=2)
 
 ## 晓皮肤文字效果
 
-[demo](http://codepen.io/numerhero/embed/KNNJwV/?height=319&theme-id=0&default-tab=result&embed-version=2)
+[demo](http://codepen.io/bilibiliou/embed/KNNJwV/?height=319&theme-id=0&default-tab=result&embed-version=2)
 
 
 ## Low-Poly 风格熊猫动画
 
-[demo](http://codepen.io/numerhero/embed/PbpwmE/?height=592&theme-id=0&default-tab=result&embed-version=2)
+[demo](http://codepen.io/bilibiliou/embed/PbpwmE/?height=592&theme-id=0&default-tab=result&embed-version=2)
 
 ## 霓虹灯动画
 
-[demo](http://codepen.io/numerhero/embed/KNZRGz/?height=650&theme-id=0&default-tab=result&embed-version=2)
+[demo](http://codepen.io/bilibiliou/embed/KNZRGz/?height=650&theme-id=0&default-tab=result&embed-version=2)
 
 
 ## 基于Canvas描边动画工具（学习用）
@@ -65,22 +65,22 @@
 
 下载直接打开 Beseel.html 可用
 
-![google](https://numerhero.github.io/assets/download/animations/google.gif)
+![google](https://bilibiliou.github.io/assets/download/animations/google.gif)
 
 ## 百度熊动画
 
-[demo](https://codepen.io/numerhero/embed/JEmyJo/?height=507&theme-id=0&default-tab=result&embed-version=2)
+[demo](https://codepen.io/bilibiliou/embed/JEmyJo/?height=507&theme-id=0&default-tab=result&embed-version=2)
 
 ## 3d 翻折效果
 
-[demo](https://codepen.io/numerhero/embed/xqOyEY/?height=545&theme-id=0&default-tab=result&embed-version=2)
+[demo](https://codepen.io/bilibiliou/embed/xqOyEY/?height=545&theme-id=0&default-tab=result&embed-version=2)
 
 ## 缤纷按钮效果（仿手Q）
 
-![gif](https://numerhero.github.io/assets/download/animations/colorful-button.gif)
+![gif](https://bilibiliou.github.io/assets/download/animations/colorful-button.gif)
 
 SVG 图取材于 阿里icon
 
 ## SVG loading
 
-![gif](https://numerhero.github.io/assets/download/animations/wait.gif)
+![gif](https://bilibiliou.github.io/assets/download/animations/wait.gif)

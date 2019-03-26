@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack --colors -w"
   },
-  "author": "Owen <ouyangxiangyue@baidu.com> (https://github.com/numerhero)",
+  "author": "Owen <ouyangxiangyue@baidu.com> (https://github.com/bilibiliou)",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.22.1",

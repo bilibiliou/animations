@@ -783,7 +783,7 @@ webpackJsonp([0],[
 	 *
 	 * @author Owen
 	 * @email  ouyangxiangyue@baidu.com
-	 * @github github/numerhero
+	 * @github github/bilibiliou
 	 * @date   2017-02-03
 	 * @param  {Array}                 shape 图形的个个点组成的坐标
 	 * @param  {Object}                 test 触点对象
@@ -807,7 +807,7 @@ webpackJsonp([0],[
 	 *
 	 * @author Owen
 	 * @email  ouyangxiangyue@baidu.com
-	 * @github github/numerhero
+	 * @github github/bilibiliou
 	 * @date   2017-02-03
 	 * @param  {Object}                 hitPoint 判断点对象
 	 * @param  {Number}                 x        触点x
@@ -828,7 +828,7 @@ webpackJsonp([0],[
 	 *
 	 * @author Owen
 	 * @email  ouyangxiangyue@baidu.com
-	 * @github github/numerhero
+	 * @github github/bilibiliou
 	 * @date   2017-02-03
 	 * @param  {Number}                     x
 	 * @param  {Number}                     y

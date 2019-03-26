@@ -6,7 +6,7 @@ import Point from './Point.js';
  *
  * @author Owen
  * @email  ouyangxiangyue@baidu.com
- * @github github/numerhero
+ * @github github/bilibiliou
  * @date   2017-02-03
  * @param  {Array}                 shape 图形的个个点组成的坐标
  * @param  {Object}                 test 触点对象
@@ -31,7 +31,7 @@ export let testInside = (shape, test) => {
  *
  * @author Owen
  * @email  ouyangxiangyue@baidu.com
- * @github github/numerhero
+ * @github github/bilibiliou
  * @date   2017-02-03
  * @param  {Object}                 hitPoint 判断点对象
  * @param  {Number}                 x        触点x
@@ -52,7 +52,7 @@ export let testPointHit = (hitPoint, x, y) =>  {
  *
  * @author Owen
  * @email  ouyangxiangyue@baidu.com
- * @github github/numerhero
+ * @github github/bilibiliou
  * @date   2017-02-03
  * @param  {Number}                     x
  * @param  {Number}                     y

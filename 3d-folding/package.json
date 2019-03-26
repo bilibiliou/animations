@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Owen <ouyangxiangyue@baidu.com> (https://github.com/numerhero)",
+  "author": "Owen <ouyangxiangyue@baidu.com> (https://github.com/bilibiliou)",
   "license": "ISC",
   "babel": {
     "presets": [

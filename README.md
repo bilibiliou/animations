@@ -1,6 +1,12 @@
 
 # 我研究的一些前端动画效果(Canvas 和 Svg)
 
+## 缤纷色彩
+
+研究噪声的时候无意中弄出来的哈哈
+
+[demo](https://codepen.io/numerhero/pen/ewjvYQ)
+
 ## A star generate and rotate made by GLSL
 
 这个效果由纯GLSL 语言完成，算是我学习GLSL的 处女作，记录一下

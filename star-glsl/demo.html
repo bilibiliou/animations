@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="../three.js"></script>
+  <script id="vertexShader" type="x-shader/x-vertex">
+    void main() {
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  </script>
+  <script id="fragmentShader" type="x-shader/x-fragment">
+    #define PI 3.14159265359
+    #define TWO_PI 6.28318530718
+
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform float u_time;
+    uniform float u_final;
+    uniform float u_rotate;
+    vec3 cn (vec3 target) {
+      return vec3(
+        target.x / 255.,
+        target.y / 255.,
+        target.z / 255.
+      );
+    }
+
+    void main(){
+      vec2 st = gl_FragCoord.xy/u_resolution.xy;
+      st.x *= u_resolution.x/u_resolution.y;
+      vec3 colorA = cn(vec3(241., 88., 113.));
+      vec3 colorB = cn(vec3(45., 64., 194.));
+      vec3 white = vec3(1.);
+      vec3 black = vec3(0.);
+      float d = 0.0;
+
+      st = st *2.-1.;
+
+      int N = 3;
+
+      float a;
+      if (u_time < u_final) {
+        a = atan(st.x,st.y) * u_time; // -3.14 到 +3.14
+      } else {
+        a = atan(st.x,st.y) * u_final - u_rotate;
+      }
+
+      float k = length(st) * 2.;
+      float r = TWO_PI/float(N); // 每一个内角的值
+      d = cos(floor(0.500+a/r)*r-a) * k;
+
+      vec3 color = mix(white, black, 1. - smoothstep(.1,0.736,d));
+
+      gl_FragColor = vec4(color,1.0);
+    }
+  </script>
+  <script>
+      var container;
+      var camera, scene, renderer;
+      var uniforms;
+      var mesh;
+      var final = 2.0;
+      init();
+      animate();
+
+      function init() {
+          container = document.getElementById( 'container' );
+
+          camera = new THREE.PerspectiveCamera(75, window.innerHeight / window.innerHeight, 0.1, 50);
+          camera.position.z = 1;
+
+          scene = new THREE.Scene();
+
+          var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+
+          uniforms = {
+              u_time: { type: "f", value: 1.0 },
+              u_final: { type: "f", value: final },
+              u_rotate: { type: "f", value: 0.0 },
+              u_resolution: { type: "v2", value: new THREE.Vector2()
+            }
+          };
+
+          var material = new THREE.ShaderMaterial( {
+              side: THREE.DoubleSide,
+              uniforms: uniforms,
+              vertexShader: document.getElementById( 'vertexShader' ).textContent,
+              fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+          } );
+
+          mesh = new THREE.Mesh( geometry, material );
+          scene.add( mesh );
+
+          renderer = new THREE.WebGLRenderer();
+          renderer.setPixelRatio( window.devicePixelRatio );
+
+          container.appendChild( renderer.domElement );
+
+          onWindowResize();
+          window.addEventListener( 'resize', onWindowResize, false );
+      }
+
+      function onWindowResize( event ) {
+          renderer.setSize( window.innerHeight, window.innerHeight );
+          uniforms.u_resolution.value.x = renderer.domElement.height;
+          uniforms.u_resolution.value.y = renderer.domElement.height;
+      }
+
+      function animate() {
+          requestAnimationFrame( animate );
+          render();
+      }
+
+      function render() {
+          var {u_time, u_final, u_rotate} = uniforms
+          u_time.value += 0.005;
+          if (u_time >= u_final) {
+            u_rotate.value += 0.01;
+          }
+          renderer.render( scene, camera );
+      }
+  </script>
+</body>
+</html>

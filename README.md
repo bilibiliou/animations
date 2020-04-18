@@ -3,7 +3,7 @@
 
 ## 缤纷色彩
 
-研究噪声的时候无意中弄出来的哈哈
+研究噪声的时候无意中弄出来的
 
 [demo](https://codepen.io/numerhero/pen/ewjvYQ)
 

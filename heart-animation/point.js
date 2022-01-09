@@ -10,13 +10,13 @@ class Point {
   currentVector = new THREE.Vector3();
   // 图片变形后的三维坐标
   targetVector = new THREE.Vector3();
-  constructor (v, index, plane) {
+  constructor (v, index, plane, pointsTotal) {
     const { PI } = Math;
     this.vertice = v;
     this.index = index;
     this.plane = plane;
     this.initVector = new THREE.Vector3(v.x, v.y, v.z);
-    const degree = 2 * PI / 91 * (index + 1);
+    const degree = 2 * PI / pointsTotal * (index + 1);
     const {x, y} = calcHeartPosition(degree);
     const z = index * 0.1; // 让它们有个层级关系
     // 我们希望变化成一个心形，所以把心形计算出来的坐标设置给Vector的xy

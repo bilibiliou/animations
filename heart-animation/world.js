@@ -7,6 +7,7 @@ const near = 1;
 // 摄像机视锥体远端面
 const far = 1000;
 
+let timer = null;
 let rootId = '#bear';
 
 class World {
@@ -35,8 +36,10 @@ class World {
     });
     this.plane.createPlane();
     this.container.addEventListener('click', () => {
-      this.isClicked = !this.isClicked;
-      this.isSetteled = false;
+      if (this.isSetteled) {
+        this.isClicked = !this.isClicked;
+        this.isSetteled = false;
+      }
     });
   }
 
@@ -66,15 +69,17 @@ class World {
   }
 
   refreshStage = () => {
-    const { plane, isSetteled, renderer, scene, mesh, camera } = this;
+    const { plane, isSetteled, renderer, scene, camera } = this;
 
     if (!isSetteled) {
       plane.reRender();
-      // setTimeout(() => {
-      //   this.isSetteled = true;
-      // }, 1000);
+      if (!timer) {
+        timer = setTimeout(() => {
+          this.isSetteled = true;
+          timer = null
+        }, 5000);
+      }
     }
-
     renderer.render(scene, camera);
   }
 

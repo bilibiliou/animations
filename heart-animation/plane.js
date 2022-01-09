@@ -54,7 +54,7 @@ class Plane {
         const y = vertices[i + 1];
         const z = vertices[i + 2];
         const v = new THREE.Vector3(x, y, z);
-        const point = new Point(v, i / 3, this);
+        const point = new Point(v, i / 3, this, vertices.length / 3);
         this.points.push(point);
       }
       this.mesh = new THREE.Mesh(this.geometry, this.material);

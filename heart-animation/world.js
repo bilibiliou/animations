@@ -1,209 +1,87 @@
+// 摄像机视锥体垂直视野角度
+const fov = 45;
+// 摄像机视锥体长宽比
+let aspect = void 0;
+//  摄像机视锥体近端面
+const near = 1;
+// 摄像机视锥体远端面
+const far = 1000;
 
-World = ( function() {	
-	function World( _op ) {
-		this._objMng;
+let rootId = '#bear';
 
-		this.isOver = true;
-    this.isAction = true;
+class World {
+  plane = null; // Plane 实例
+  isClicked = false; // 鼠标是否点击了舞台
+  isSetteled = true; // 当前是否处于动画稳定态
+  // 舞台的宽高
+  stageWidth = innerWidth;
+  stageHeight = innerHeight;
 
-    // canvas 父级Id, 前景图片, 后景图片, 点击跳转的URL
-		this._parent = _op._parent;
-		this._id = _op._id;
-		this._bmd1 = _op._bmd1;
-		this._bmd2 = _op._bmd2;
-		this._url = _op._url;
+  // Three 的容器
+  container = null;
+  // ThreeJs 的相机实例
+  camera = null;
+  // Three 的场景实例
+  scene = null;
+  // Three 的渲染器
+  renderer = null;
 
-    /** 获取图片的 舞台宽高 */
-		this._stageWidth = document.getElementById( this._id ).getBoundingClientRect().width;
-		this._stageHeight = document.getElementById( this._id ).getBoundingClientRect().height;
-		
-		// camera 设置
-		this._fov = 45;
-		this._far = 2000;
-		this._near = 1;
-		this.init();
-	}
-	/*
-	INIT
-	*/
-	World.prototype.init = function() {
-		//if ( !Detector.webgl ) isWebGL = false;
-		isWebGL = false;
-		
-		var _this = this;
-		this._meshParentList = [];
+  constructor() {
+    this.initEngine();
+    this.initRender();
+    this.plane = new Plane({
+      name: 'mainPalne',
+      world: this
+    });
+    this.plane.createPlane();
+    this.container.addEventListener('click', () => {
+      this.isClicked = !this.isClicked;
+      this.isSetteled = false;
+    });
+  }
 
-		this.initEngine();
-		this.initRender();
+  initEngine = () => {
+    const root = document.querySelector(rootId);
+    const { width, height } = root.getBoundingClientRect();
+    this.container = root;
 
-		//RESIZE
-		// if( isFullScreen )
-		// {
-		// 	window.onresize = function( e )
-		// 	{
-		// 		return _this.onResize( e );
-		// 	};
-			
-		// 	this.onResize( );
-		// }
-			
-		// 模型生成管理
-		this._objMng = new ObjectMngCV( this );
-		
-		this.createModel( );
+    this.stageWidth = width;
+    this.stageHeight = height;
+    aspect = this.stageWidth / this.stageHeight;
+    // camera init
+    this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    // scene init
+    this.scene = new THREE.Scene();
+    this.camera.position.z = 500;
+    // this.camera.lookAt(this.scene.position);
+  }
 
-		var self = this;
-		document.querySelector( String( "#" + self._id ) ).addEventListener('mouseenter',
-			function() {
-				document.body.style.cursor = "pointer";
-				self.mOver( );
-			},
-    );
+  initRender = () => {
+    const { stageWidth, stageHeight } = this;
+    this.renderer = new THREE.WebGLRenderer({antialias: true});
+    this.renderer.setClearColor(0xffc0cb, 1);
+    this.renderer.setPixelRatio( window.devicePixelRatio );
+    this.renderer.setSize(stageWidth, stageHeight);
+    this.container.appendChild(this.renderer.domElement);
+  }
 
-		document.querySelector( String( "#" + self._id ) ).addEventListener('mouseout', function() {
-      document.body.style.cursor = "default";
-      self.mOut( );
-    })
+  refreshStage = () => {
+    const { plane, isSetteled, renderer, scene, mesh, camera } = this;
 
-    // 点击后页面跳转
-    document.querySelector( String( "#" + self._id ) )
-      .addEventListener('click', function() { 
-        pageJump( self._url )
-      });
+    if (!isSetteled) {
+      plane.reRender();
+      // setTimeout(() => {
+      //   this.isSetteled = true;
+      // }, 1000);
+    }
 
-		// this._parent.modelComp();
-	}
+    renderer.render(scene, camera);
+  }
 
-	/*
-	OVER
-	*/
-	World.prototype.mOver = function() {
-		if( !this.isOver )
-		{
-			this.isOver = true;
-			this.isAction = true;
-		}
-	}
-	
-	World.prototype.mOut = function() {
-		if( this.isOver )
-		{
-			this.isOver = false;
-		}
-	}
-	
-	
-	
-	/*
-	*/
-	World.prototype.animeEnd = function()
-	{
-		this.isAction = false;
-	}
-	
-	
-		
-	/*
-	ENGINE
-	*/
-	World.prototype.initEngine = function()
-	{
-		this._container = document.createElement( 'div' );
-		document.getElementById( this._id ).appendChild( this._container );
-		
-		//camera
-		this._cam = new THREE.PerspectiveCamera( this._fov, this._stageWidth / this._stageHeight, this._near, this._far );
-		// this._cam.position.z = 496;
-    this._cam.position.z = 30
-
-		if( !isWebGL ) {
-			this._cam.position.z = 494;
-		}
-
-		//scene
-    this._scene = new THREE.Scene();
-    this._cam.lookAt(this._scene.position);
-    
-	}
-		
-		
-	/*
-	INIT RENDER
-	*/
-	World.prototype.initRender = function( )
-	{
-		//RENDER-------------------------------------------------------------------------------------------
-    this._render = new THREE.WebGLRenderer();
-    this._render.setClearColor(0xffc0cb, 1)
-
-		this._render.setSize( this._stageWidth, this._stageHeight );
-		this._container.appendChild( this._render.domElement );
-	}
-
-	/*
-	模型生成
-	*/
-	World.prototype.createModel = function() {
-		this._objMng.createPlane();
-	}
-
-	/*
-	 Mesh追加
-	*/
-	World.prototype.addMesh = function( _mesh, _obj ) {	
-		//3d mesh
-		this._scene.add( _mesh );
-		
-		if( _obj != null || _obj != undefined ) {
-			this._meshParentList.push( _obj );
-		}
-		
-		this._render.render( this._scene, this._cam );
-	}
-
-		
-		
-	/*
-	RENDER
-	*/
-	World.prototype.onEnterFrame = function() {
-		if( this.isAction ) {	
-			var _leng = this._meshParentList.length;
-		
-			for( var i = 0; i < _leng; i++ )
-			{
-				this._meshParentList[i].onEnterFrame();
-			}
-
-			this._render.render( this._scene, this._cam );
-		}
-	}
-		
-		
-	/*
-	RESIZE
-	*/
-	World.prototype.onResize = function( e )
-	{
-		if(typeof e === "undefined"){ e = null; }
-			
-		this._stageWidth = window.innerWidth;
-		this._stageHeight = window.innerHeight;
-			
-		this._cam.aspect = this._stageWidth / this._stageHeight;
-		this._cam.updateProjectionMatrix();
-		this._render.setSize( this._stageWidth, this._stageHeight );
-	}
-
-	return World;
-		
-} )();
-
-
-
-
-
-
-
-
-
+  // 添加网格，如果需要添加可以添加各种网格
+  addMesh = (mesh) => {
+    const { scene, renderer, camera } = this;
+    scene.add(mesh);
+    renderer.render(scene, camera);
+  }
+}

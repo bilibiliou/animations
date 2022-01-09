@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>bear</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      background: pink;
+    }
+
+    #bear {
+      width: 600px;
+      height: 400px;
+      margin: auto;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="bear"></div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.js"></script>
+<script src="./heart.js"></script>
+<script src="./point.js"></script>
+<script src="./plane.js"></script>
+<script src="./world.js"></script>
+<script>
+  window.onload = function () {
+    const world = new World();
+    (function render() {
+      requestAnimationFrame(() => {
+        world.refreshStage();
+        render();
+      });
+    })();
+  }
+</script>
+
+</html>

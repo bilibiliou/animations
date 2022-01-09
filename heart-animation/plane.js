@@ -75,7 +75,7 @@ class Plane {
       mesh.material.wireframe = true;
     }
     const vertices = this.geometry.attributes.position.array;
-    const newPosition = new Float32Array( vertices.length ); // 3 vertices per point
+    const newPosition = new Float32Array( vertices.length );
 
     for (let i = 0; i < this.points.length; i++) {
       const { x, y ,z } = this.points[i].move(isClicked);

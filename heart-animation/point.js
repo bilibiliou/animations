@@ -3,7 +3,6 @@ class Point {
   vertice = null; // geometry.vertices 里的顶点实例
   index; // geometry.vertices 里的顶点索引
   plane = null; // Plane 实例
-  radius = 66;
   // 图片变型前的三维坐标
   initVector;
   // 当前的坐标
@@ -24,6 +23,7 @@ class Point {
     this.targetVector.y = y;
     this.targetVector.z = z;
 
+    // 初始化一开始点的位置，是展开铺在图片的
     this.currentVector.x = v.x;
     this.currentVector.y = v.y;
     this.currentVector.z = z;
@@ -35,10 +35,12 @@ class Point {
     const { x: tx, y: ty, z: tz } = this.targetVector;
     const p = 0.01; // 补间的系数，这里简单来就用线性的
     if (isClicked) {
+      // 判断点击态，如果第一次点就揉成爱你的心
       this.currentVector.x = tween(cx, tx, p);
       this.currentVector.y = tween(cy, ty, p);
       this.currentVector.z = tween(cz, tz, p);
     } else {
+      // 第二次点击就还原为女朋友的照片
       this.currentVector.x = tween(cx, ix, p);
       this.currentVector.y = tween(cy, iy, p);
       this.currentVector.z = tween(cz, iz, p);
